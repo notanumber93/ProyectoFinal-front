@@ -49,50 +49,6 @@ const MyCarousel = () => {
 
 
 
-// const MyCarousel = () => {
-//   return (
-//     <div className="container">
-      
-//      <Carousel>
-//       <Carousel.Item interval={15000} className="d-block justify-content-center">
-//         <img
-//           className="d-block w-30"
-//           src="https://images-na.ssl-images-amazon.com/images/I/71wbalyU7tL._AC_SY741_.jpg"
-//           alt="First slide"
-//         />
-//         <Carousel.Caption style={{top: "5%"}}>
-//           <h2 className="bar">Top Movie</h2>
-//           <h4 className="bar">Elección de los Críticos</h4>
-//         </Carousel.Caption>
-//       </Carousel.Item>
-//       <Carousel.Item interval={15000} className="d-block justify-content-center">
-//         <img
-//           className="d-block w-30"
-//           src="https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_UX182_CR0,0,182,268_AL_.jpg"
-//           alt="Second slide"
-//         />
 
-//         <Carousel.Caption>
-//         <h2 className="bar">Top Movie</h2>
-//         <h4 className="bar">Elección de Movierank</h4>
-//         </Carousel.Caption>
-//       </Carousel.Item>
-//       <Carousel.Item interval={15000} className="d-block justify-content-center">
-//         <img
-//           className="d-block w-30"
-//           src="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX182_CR0,0,182,268_AL_.jpg"
-//           alt="Third slide"
-//         />
-
-//         <Carousel.Caption>
-//         <h2 className="bar">Top Movie</h2>
-//         <h4 className="bar">Elección del público</h4>
-//         </Carousel.Caption>
-//       </Carousel.Item>
-
-//     </Carousel> 
-//     </div>
-//   )
-// }
 
 export default MyCarousel;
