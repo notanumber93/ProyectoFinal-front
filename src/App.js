@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { Home } from "./views/home";
+import { Demo } from "./views/demo";
+import { Detailcharacter, Singlecharacter } from "./views/detailcharacters";
+import injectContext from "./store/appContext";
+import Navbar from "./component/Navbar";
+import { Detailvehicle } from "./views/detailvehicles";
+import { Detailplanet } from "./views/detailplanets";
 
-export default App;
+// import Navbar from "./component/Navbar";
+// import Footer from "./component/footer";
+
+//create your first component
+const App = () => {
+	//the basename is used when your project is published in a subdirectory and not in the root of the domain
+	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
+	const basename = process.env.BASENAME || "";
+
+	return (
+		<div className="d-flex flex-column h-100">
+			<BrowserRouter basename={basename}>
+				{/* <ScrollToTop> */}
+				<Navbar />
+				<Switch>
+					<Route exact path="/">
+						<Home />
+					</Route>
+					<Route exact path="/home">
+						<Home />
+					</Route>
+					<Route exact path="/" component={} />
+					<Route exact path="/" component={} />
+					<Route exact path="/" component={} />
+					<Route>
+						<h1>Not found!</h1>
+					</Route>
+				</Switch>
+				{/* </ScrollToTop> */}
+			</BrowserRouter>
+		</div>
+	);
+};
+
+export default injectContext(App);
