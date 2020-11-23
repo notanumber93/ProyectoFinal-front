@@ -1,19 +1,4 @@
-.bar {
-  padding: 0.5em 0;
-  opacity: 0.8;
-  background: black;
-  border-top: 3px solid #ccc;
-  border-bottom: 3px solid #ccc;
-}
 
-.carousel-caption{
-  top: 2%;
-  bottom: 0;
-}
-.movie {
-  height: 550px;
-  margin: 0 auto;
-}
 
 .App {
   text-align: center;
