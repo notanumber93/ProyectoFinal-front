@@ -28,7 +28,7 @@ const MyCarousel = () => {
         />
 
         <Carousel.Caption>
-          <h2 className="bar">Top Movie - Elecciòn de Movierank</h2>
+          <h2 className="bar">Top Movie - Elección de Movierank</h2>
          
         </Carousel.Caption>
       </Carousel.Item>
