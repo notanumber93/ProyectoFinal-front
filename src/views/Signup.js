@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import Navbarhome from "../component/Navbarhome";
+import Navbarhome from "../components/Navbarhome";
 import {Context} from "../store/appContext";
 
 
