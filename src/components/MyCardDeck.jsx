@@ -1,4 +1,4 @@
-import CardDeck from "react-bootstrap/CardDeck";
+import { CardDeck } from "react-bootstrap";
 import MyCard from "./MyCard";
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
