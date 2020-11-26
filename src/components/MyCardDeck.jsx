@@ -2,24 +2,26 @@ import { CardDeck } from "react-bootstrap";
 import MyCard from "./MyCard";
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import MyCarousel from "./MyCarousel";
 
 const MyCardDeck = () => {
-  // const { store, actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
 
-  // useEffect(() => {
-  //   //function to fetch list of movies
-  //   actions.getMovieList();
-  // }, [actions]);
+  useEffect(() => {
+    actions.getMovieList();
+  }, [actions]);
 
   return (
-    <CardDeck>
-      <MyCard/>
-      {/* {store.movieList.map((item, index) => {
+    <CardDeck className="justify-content-center">
+      {store.movieList.map((item, index) => {
         return (
-          <MyCard title={item.title} poster={item.poster} year={item.year} />
+          <MyCard
+            key={index}
+            title={item.Title}
+            poster={item.Poster}
+            year={item.Year}
+          />
         );
-      })} */}
+      })}
     </CardDeck>
   );
 };
