@@ -19,14 +19,12 @@ function Navbarhome() {
           <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z" />
         </svg>
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <Link className="nav-link" to="/login">Login <span class="sr-only">(current)</span></Link>
-          </li>
+  
           <li className="nav-item">
             <Link className="nav-link" to="/home">Inicio</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/signup">Registrate</Link>
+            <Link className="nav-link" to="/signup">Login</Link>
           </li>
           <li className="nav-item dropdown">
             <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

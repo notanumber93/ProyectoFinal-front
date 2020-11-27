@@ -21,9 +21,10 @@ const App = () => {
 	return (
 		<div className="d-flex flex-column">
 			<BrowserRouter basename={basename}>
-			<Route exact path="/" component={Home} />
+			
 				{/* <ScrollToTop> */}
 					<Switch>
+					<Route exact path="/" component={Home} />
 						<Route exact path="/home">
 							<Home />
 						</Route>
