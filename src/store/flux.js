@@ -13,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				},
 				getMovieList: async () => {
+				
 					const config = {
 						headers: {
 							"Content-Type": "application/json"
@@ -24,6 +25,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					);
 					const json = await response.json();
 					setStore({movieList: json.Search});
+	
 				}
 			}
 		}
