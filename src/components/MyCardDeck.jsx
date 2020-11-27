@@ -8,7 +8,7 @@ const MyCardDeck = () => {
 
   useEffect(() => {
     actions.getMovieList();
-  }, [actions]);
+  }, []);
 
   return (
     <CardDeck className="justify-content-center">
