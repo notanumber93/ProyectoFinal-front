@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			user_data: { },
-			movieList: []
+			movieList: [],
+			movieDetails: { }
 			},
 
 			actions: {
@@ -13,19 +14,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				},
 				getMovieList: async () => {
-				
-					const config = {
-						headers: {
-							"Content-Type": "application/json"
-						}
-					};
 					const response = await fetch(
-						"https://cors-anywhere.herokuapp.com/http://www.omdbapi.com?s=star wars&apikey=e038e961",
-						config
+						"http://www.omdbapi.com?s=star%20wars&type=movie&apikey=70240a7d"
 					);
 					const json = await response.json();
+					console.log("--json--", json);
 					setStore({movieList: json.Search});
-	
+				},
+				getMovieDetails: async (title) => {
+					getActions().cleanMovieDetails();
+					const response = await fetch(
+						`https://cors-anywhere.herokuapp.com/http://www.omdbapi.com?t=${title}&apikey=70240a7d`
+					);
+					const json = await response.json();
+					console.log("--json--", json);
+					setStore({movieDetails: json});
+				},
+				cleanMovieDetails: () => {
+					setStore({movieDetails: { }});
 				}
 			}
 		}
