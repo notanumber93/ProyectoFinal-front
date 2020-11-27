@@ -14,24 +14,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				},
 				getMovieList: async () => {
-<<<<<<< HEAD
-				
-					const config = {
-						headers: {
-							"Content-Type": "application/json"
-						}
-					};
-=======
->>>>>>> 4ac8ce5... Terminado modal card details
 					const response = await fetch(
 						"http://www.omdbapi.com?s=star%20wars&type=movie&apikey=70240a7d"
 					);
 					const json = await response.json();
 					console.log("--json--", json);
 					setStore({movieList: json.Search});
-<<<<<<< HEAD
-	
-=======
 				},
 				getMovieDetails: async (title) => {
 					getActions().cleanMovieDetails();
@@ -44,7 +32,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				},
 				cleanMovieDetails: () => {
 					setStore({movieDetails: { }});
->>>>>>> 4ac8ce5... Terminado modal card details
 				}
 			}
 		}
