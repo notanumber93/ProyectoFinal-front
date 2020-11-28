@@ -13,9 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(evento)
 
 				},
-				getMovieList: async () => {
+				getMovieList: async (searchValue) => {
 					const response = await fetch(
-						"http://www.omdbapi.com?s=star%20wars&type=movie&apikey=70240a7d"
+						`http://www.omdbapi.com?s=${searchValue}&type=movie&apikey=70240a7d`
 					);
 					const json = await response.json();
 					console.log("--json--", json);
