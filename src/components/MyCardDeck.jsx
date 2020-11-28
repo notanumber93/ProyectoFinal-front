@@ -3,12 +3,12 @@ import MyCard from "./MyCard";
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
-const MyCardDeck = () => {
+const MyCardDeck = (props) => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
-    actions.getMovieList();
-  }, []);
+    actions.getMovieList(props.searchValue);
+  }, [props.searchValue]);
 
   return (
     <CardDeck className="justify-content-center">
