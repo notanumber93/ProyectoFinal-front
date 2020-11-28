@@ -24,7 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getMovieDetails: async (title) => {
 					getActions().cleanMovieDetails();
 					const response = await fetch(
-						`https://cors-anywhere.herokuapp.com/http://www.omdbapi.com?t=${title}&apikey=70240a7d`
+						`http://www.omdbapi.com?t=${title}&apikey=70240a7d`
 					);
 					const json = await response.json();
 					console.log("--json--", json);
