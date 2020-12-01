@@ -3,7 +3,7 @@ import MyCard from "./MyCard";
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
-const MyCardDeck = (props) => {
+export const MyCardDeck = (props) => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const MyCardDeck = (props) => {
 
   return (
     <CardDeck className="justify-content-center">
-      {store.movieList.map((item, index) => {
+      {!!store.movieList && store.movieList.length>0 && store.movieList.map((item, index) => {
         return (
           <MyCard
             key={index}
@@ -23,7 +23,7 @@ const MyCardDeck = (props) => {
         );
       })}
     </CardDeck>
-  );
-};
+    )
+}
 
 export default MyCardDeck;
