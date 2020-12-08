@@ -1,5 +1,14 @@
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
 const Form = () => {
+    const { store, actions } = useContext(Context);
+
+    const handleSubmit = (evento) => {
+        evento.preventDefault();
+        actions.onSignup();
+    };
+
     return (
         <>
             <div className="container">
@@ -11,44 +20,86 @@ const Form = () => {
             </div>
             <div className="row">
                 <div className="col-6">
-                    <form>
+                    <form onSubmit={(evento) => handleSubmit(evento)}>
                         <div className="row mt-4">
                             <div className="col">
-                                <input type="text" className="form-control" placeholder="Nombre" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Nombre"
+                                    name="firstName"
+                                    onChange={(evento) =>
+                                        actions.onChangeUser(evento)
+                                    }
+                                />
                             </div>
                         </div>
                         <div className="row mt-4">
                             <div className="col">
-                                <input type="text" className="form-control" placeholder="Apellido" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Apellido"
+                                    name="lastName"
+                                    onChange={(evento) =>
+                                        actions.onChangeUser(evento)
+                                    }
+                                />
                             </div>
                         </div>
                         <div className="row mt-4">
                             <div className="col">
-                                <input type="text" className="form-control" placeholder="Email" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Email"
+                                    name="email"
+                                    onChange={(evento) =>
+                                        actions.onChangeUser(evento)
+                                    }
+                                />
                             </div>
                         </div>
                         <div className="row mt-4">
                             <div className="col">
-                                <input type="text" className="form-control" placeholder="Nombre de Usuario" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Nombre de Usuario"
+                                    name="userName"
+                                    onChange={(evento) =>
+                                        actions.onChangeUser(evento)
+                                    }
+                                />
                             </div>
                         </div>
 
                         <div className="row mt-4">
                             <div className="col">
-                                <input type="password" className="form-control" placeholder="Contraseña" />
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    placeholder="Contraseña"
+                                    name="userPass"
+                                    onChange={(evento) =>
+                                        actions.onChangeUser(evento)
+                                    }
+                                />
                             </div>
                         </div>
 
                         <div className="row text-center mt-4">
                             <div className="mx-auto">
-                                <button type="submit" className="btn btn-dark">Registrar</button>
+                                <button type="submit" className="btn btn-dark">
+                                    Registrar
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default Form;

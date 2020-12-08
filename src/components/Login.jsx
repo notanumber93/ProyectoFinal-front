@@ -1,5 +1,14 @@
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
 const Login = () => {
+    const { store, actions } = useContext(Context);
+
+    const handleSubmit = (evento) => {
+        evento.preventDefault();
+        actions.onLogin();
+    };
+
     return (
         <>
             <div className="container">
@@ -11,28 +20,46 @@ const Login = () => {
             </div>
             <div className="row">
                 <div className="col-6">
-                    <form>
+                    <form onSubmit={(evento) => handleSubmit(evento)}>
                         <div className="row mt-4">
                             <div className="col">
-                                <input type="text" className="form-control" placeholder="Usuario" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Usuario"
+                                    name="userLogin"
+                                    onChange={(evento) =>
+                                        actions.onChangeLogin(evento)
+                                    }
+                                />
                             </div>
                         </div>
 
                         <div className="row mt-4">
                             <div className="col">
-                                <input type="password" className="form-control" placeholder="Contraseña" />
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    placeholder="Contraseña"
+                                    name="userPass"
+                                    onChange={(evento) =>
+                                        actions.onChangeLogin(evento)
+                                    }
+                                />
                             </div>
                         </div>
                         <div className="row text-center mt-4">
                             <div className="mx-auto">
-                                <button type="submit" className="btn btn-dark">Ingresar</button>
+                                <button type="submit" className="btn btn-dark">
+                                    Ingresar
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default Login;
