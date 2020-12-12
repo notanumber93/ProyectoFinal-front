@@ -5,18 +5,18 @@ import MyCardDeck from "../components/MyCardDeck";
 
 
 export const Home = () => {
-    const [ searchValue, setSearchValue ] = useState('star wars');
+    const [searchValue, setSearchValue] = useState('star wars');
 
     const handledChange = e => {
         setSearchValue(e.target.value);
         console.log(e.target.value);
     }
 
-    return(
+    return (
         <>
-        <Navbarhome searchValue={searchValue} handledChange={handledChange}/>
-                <MyCarousel/>
-        <MyCardDeck searchValue={searchValue}/>
+            <Navbarhome searchValue={searchValue} handledChange={handledChange} />
+            <MyCarousel />
+            <MyCardDeck searchValue={searchValue} />
         </>
     );
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import MyCardDetails from "./MyCardDetails";
+import StarRating from "./StarRating";
+import { FaStar } from "react-icons/fa";
 
 const MyCard = (props) => {
     const [modalShow, setModalShow] = useState(false);
@@ -40,9 +42,19 @@ const MyCard = (props) => {
                 style={{ cursor: "pointer" }}
             >
                 <Card.Title>{props.title}</Card.Title>
-                <Card.Subtitle>{props.year}</Card.Subtitle>
+                <Card.Subtitle>
+                    {props.year}<br></br>
+                { <FaStar
+                        className="star"
+                        color="#ffc107"
+                        size={20}
+                    /> }
+                    {props.rate_avg != undefined ? props.rate_avg : '-'}
+                </Card.Subtitle>
             </Card.Body>
-            <Card.Footer>placeholder</Card.Footer>
+            <Card.Footer>
+               <StarRating user_id={1} movie_id={props.movie_id}/>
+            </Card.Footer>
             {modalDetails}
         </Card>
     );

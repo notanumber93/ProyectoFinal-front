@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import Navbarhome from "../components/Navbarhome";
+import MyCardeck, { MyCardDeck } from "../components/MyCardDeck";
 import UserProfile from "../components/UserProfile";
 import { Context } from "../store/appContext";
 
@@ -8,6 +9,7 @@ export const Perfil = () => {
     return (
         <>
             <Navbarhome />
+            <MyCardDeck/>
             <UserProfile
                 firstName={store.user_data.firstName}
                 lastName={store.user_data.lastName}

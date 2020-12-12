@@ -19,6 +19,8 @@ export const MyCardDeck = (props) => {
             title={item.Title}
             poster={item.Poster}
             year={item.Year}
+            movie_id={item.imdbID}
+            rate_avg={item.rate_avg}
           />
         );
       })}
