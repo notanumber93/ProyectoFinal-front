@@ -16,7 +16,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                 userLogin: "",
                 userPass: "",
             },
-            auth_token: "",
+            logged_user: {
+                userName: "",
+                email: "",
+                userPass: "",
+                firstName: "",
+                lastName: "",
+                isAdmin: false,
+                bio: "",
+                auth_token: ""
+            },
+            success: false,
             movieList: [],
             movieDetails: {},
         },
@@ -24,11 +34,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         actions: {
             updateBio: (bio) => {
                 const store = getStore();
-                let { user_data } = store;
-                user_data.bio = bio;
-                setStore({ user_data });
-                console.log(store.user_data);
-                console.log(store.user_data.id);
+                let { logged_user } = store;
+                console.log(logged_user);
+                logged_user.bio = bio;
+                setStore({ logged_user });
+                console.log(store.logged_user);
+                console.log(store.logged_user.id);
                 getActions().updateUser();
 			},
 			updateUser: async () => {
@@ -37,17 +48,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json",
-						"Authorization": `Bearer ${store.auth_token}`,
+						"Authorization": `Bearer ${store.logged_user.auth_token}`,
 					},
-					body: JSON.stringify(store.user_data),
+					body: JSON.stringify(store.logged_user),
 				};
 				const response = await fetch(
-                    `http://127.0.0.1:5000/users/${store.user_data.id}`,
+                    `http://127.0.0.1:5000/users/${store.logged_user.id}`,
                     options
                 );
                 const json = await response.json();
                 console.log(json);
-			},
+            },
+            deleteUser: async (username) => {
+                const store = getStore();
+                let options = {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${store.logged_user.auth_token}`,
+                    },
+                };
+                const response = await fetch(
+                    `http://127.0.0.1:5000/users/${username}`,
+                    options
+                );
+                const json = await response.json();
+                console.log(json);
+                setStore({ success: json.success });
+                console.log(store.success);
+            },
             onChangeUser: (evento) => {
                 const store = getStore();
                 const { user_data } = store;
@@ -93,12 +122,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 );
                 const json = await response.json();
                 console.log("--data--", json);
-                let { user_data } = store;
-                user_data = { ...json.user };
-				setStore({ user_data });
-				setStore({ auth_token: json.access_token });
-				console.log(user_data);
-				console.log(store.auth_token);
+                let { logged_user } = store;
+                logged_user = { ...json.user };
+                logged_user.auth_token = json.access_token;
+				setStore({ logged_user });
+				console.log(logged_user);
             },
             getMovieList: async (searchValue) => {
                 console.log(searchValue);
