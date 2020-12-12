@@ -1,12 +1,16 @@
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import useUserSession from "./userSession";
 
 const Login = () => {
     const { store, actions } = useContext(Context);
+    const [user, setUser] = useUserSession('user');
 
     const handleSubmit = (evento) => {
         evento.preventDefault();
         actions.onLogin();
+        setUser(JSON.stringify(store.logged_user));
+        console.log(user);
     };
 
     return (
