@@ -127,7 +127,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     `http://www.omdbapi.com/?i=${imdbId}7&apikey=70240a7d`
                 );
                 const json = await response.json();
-                console.log("--json--", json);
+                console.log("--topMoviesnp--", json);
                 setStore({ topMovies: json });
                 },
         },

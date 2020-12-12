@@ -13,7 +13,7 @@ const MyCarousel = (props) => {
   // const [ topMovies, setTopMovies] = useState(['tt0111161','tt0068646'])
 
   useEffect(() => {
-    actions.getTopMovies(['tt0111161', 'tt0068646']);
+    actions.getTopMovies('tt0111161');
   }, []);
  
 
