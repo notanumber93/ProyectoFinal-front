@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import { Card } from "react-bootstrap";
 import MyCardDetails from "./MyCardDetails";
 import StarRating from "./StarRating";
@@ -6,6 +7,7 @@ import { FaStar } from "react-icons/fa";
 
 const MyCard = (props) => {
     const [modalShow, setModalShow] = useState(false);
+    const { store, actions } = useContext(Context);
 
     let modalDetails;
     if (modalShow) {
@@ -54,7 +56,12 @@ const MyCard = (props) => {
             </Card.Body>
             <Card.Footer>
                <StarRating user_id={1} movie_id={props.movie_id}/>
-                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Añadir a Favoritos">
+                <button type="button" 
+                class="btn btn-secondary" 
+                data-toggle="tooltip" 
+                data-placement="top"
+                title="Añadir a Favoritos"
+                onClick={() => actions.addUserFavorite(props.movie_id)}>
                     &hearts;
                 </button>
             </Card.Footer>
