@@ -1,4 +1,3 @@
-import React, { useContext, useState, useEffect } from "react";
 
 const getState = ({ getStore, getActions, setStore }) => {
     return {
@@ -19,6 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             auth_token: "",
             movieList: [],
             movieDetails: {},
+            topMovies: [],
         },
 
         actions: {
@@ -121,6 +121,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             cleanMovieDetails: () => {
                 setStore({ movieDetails: {} });
             },
+            getTopMovies: async (imdbId) => {
+                getActions().cleanMovieDetails();
+                const response = await fetch(
+                    `http://www.omdbapi.com/?i=${imdbId}7&apikey=70240a7d`
+                );
+                const json = await response.json();
+                console.log("--json--", json);
+                setStore({ topMovies: json });
+                },
         },
     };
 };
