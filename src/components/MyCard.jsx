@@ -42,7 +42,11 @@ const MyCard = (props) => {
                 <Card.Title>{props.title}</Card.Title>
                 <Card.Subtitle>{props.year}</Card.Subtitle>
             </Card.Body>
-            <Card.Footer>placeholder</Card.Footer>
+            <Card.Footer>
+                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Añadir a Favoritos">
+                    &hearts;
+                </button>
+            </Card.Footer>
             {modalDetails}
         </Card>
     );
