@@ -54,6 +54,9 @@ const MyCard = (props) => {
             </Card.Body>
             <Card.Footer>
                <StarRating user_id={1} movie_id={props.movie_id}/>
+                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Añadir a Favoritos">
+                    &hearts;
+                </button>
             </Card.Footer>
             {modalDetails}
         </Card>
