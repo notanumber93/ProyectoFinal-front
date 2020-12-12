@@ -200,7 +200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             addUserFavorites: (id) => {
                 const store = getStore();
-                const { movieList } = store;
+                const { movieList, user_favorites } = store;
                 setStore({
                     user_favorites: [...user_favorites, ...movieList.filter(item => item.imdbID === id)]
                 });

@@ -22,6 +22,11 @@ const MyCard = (props) => {
         modalDetails = null;
     }
 
+    const handleFavorites = (event) => {
+        event.preventDefault();
+        actions.addUserFavorites(props.movie_id);
+    };
+
     return (
         <Card
             style={{
@@ -61,7 +66,7 @@ const MyCard = (props) => {
                 data-toggle="tooltip" 
                 data-placement="top"
                 title="Añadir a Favoritos"
-                onClick={() => actions.addUserFavorite(props.movie_id)}>
+                onClick={(event) => handleFavorites(event)}>
                     &hearts;
                 </button>
             </Card.Footer>

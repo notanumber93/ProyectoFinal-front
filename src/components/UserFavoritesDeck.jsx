@@ -2,7 +2,6 @@ import React,{useEffect, useState} from "react";
 import {CardDeck} from "react-bootstrap";
 import MyCard from "./MyCard";
 import { Context } from "../store/appContext";
-import { useEffect } from "react";
 import { useContext } from "react";
 const UserFavoritesDeck = () => {
     const { store, actions} = useContext(Context);
