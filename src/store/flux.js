@@ -29,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             success: false,
             movieList: [],
             movieDetails: {},
+            user_favorites: [],
         },
 
         actions: {
@@ -197,6 +198,13 @@ const getState = ({ getStore, getActions, setStore }) => {
               
 
             },
+            addUserFavorites: (id) => {
+                const store = getStore();
+                const { movieList } = store;
+                setStore({
+                    user_favorites: [...user_favorites, ...movieList.filter(item => item.imdbID === id)]
+                });
+            }
         },
     };
 };
