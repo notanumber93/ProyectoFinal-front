@@ -22,7 +22,7 @@ export const Perfil = () => {
                             bio={store.logged_user.bio}
                         />
                     </Tab>
-                    <Tab eventKey="favoritos" title="Favoritos">
+                    <Tab eventKey="favoritos" title="Favoritos" onClick={(e) => actions.showUserFavorites()}>
                         <UserFavoritesDeck />
                     </Tab>
                 </Tabs>

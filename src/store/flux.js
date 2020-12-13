@@ -42,18 +42,18 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log(store.logged_user);
                 console.log(store.logged_user.id);
                 getActions().updateUser();
-			},
-			updateUser: async () => {
-				const store = getStore();
-				let options = {
-					method: "PUT",
-					headers: {
-						"Content-Type": "application/json",
-						"Authorization": `Bearer ${store.logged_user.auth_token}`,
-					},
-					body: JSON.stringify(store.logged_user),
-				};
-				const response = await fetch(
+            },
+            updateUser: async () => {
+                const store = getStore();
+                let options = {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${store.logged_user.auth_token}`,
+                    },
+                    body: JSON.stringify(store.logged_user),
+                };
+                const response = await fetch(
                     `http://127.0.0.1:5000/users/${store.logged_user.id}`,
                     options
                 );
@@ -126,8 +126,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 let { logged_user } = store;
                 logged_user = { ...json.user };
                 logged_user.auth_token = json.access_token;
-				setStore({ logged_user });
-				console.log(logged_user);
+                setStore({ logged_user });
+                console.log(logged_user);
             },
             getMovieList: async (searchValue) => {
                 console.log(searchValue);
@@ -153,8 +153,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const json2 = await response2.json();
                 console.log("--json2--", json2);
                 //setStore({ rates_avgs: json2.rates_avgs });
-                for (var i=0; i<json.Search.length; i++) {
-                    for (var j=0;j<json2.rates_avgs.length; j++) {
+                for (var i = 0; i < json.Search.length; i++) {
+                    for (var j = 0; j < json2.rates_avgs.length; j++) {
                         if (json2.rates_avgs[j].movie_id == json.Search[i].imdbID) {
                             json.Search[i].rate_avg = json2.rates_avgs[j].rate_avg;
                         }
@@ -175,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ movieDetails: {} });
             },
 
-            setRating2: async(user_id, movie_id, rate)=>{
+            setRating2: async (user_id, movie_id, rate) => {
                 let options = {
                     method: "POST",
                     headers: {
@@ -186,7 +186,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Connection": "keep-alive",
                         "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
                     },
-                    body: JSON.stringify({user_id:user_id, movie_id:movie_id, rate:rate})
+                    body: JSON.stringify({ user_id: user_id, movie_id: movie_id, rate: rate })
                 };
 
                 const response = await fetch(
@@ -195,17 +195,67 @@ const getState = ({ getStore, getActions, setStore }) => {
                 );
                 const json = await response.json();
                 console.log("--rate--", json);
-              
+
 
             },
-            addUserFavorites: (id) => {
+            addUserFavorites: async (user_id, movie_id) => {
+                let options = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "User-Agent": "PostmanRuntime/7.26.8",
+                        "Accept": "*/*",
+                        "Accept-Encoding": "gzip, deflate, br",
+                        "Connection": "keep-alive",
+                        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
+                    },
+                    body: JSON.stringify({   user_id: user_id, movie_id: movie_id})
+                };
+
+                const response = await fetch(
+                    `http://127.0.0.1:5000/favorites`
+                    , options
+                );
+                const json = await response.json();
+                console.log("--favorites--", json);
+
+            },
+
+            showUserFavorites: async () => {
                 const store = getStore();
-                const { movieList, user_favorites } = store;
-                setStore({
-                    user_favorites: [...user_favorites, ...movieList.filter(item => item.imdbID === id)]
-                });
-            }
-        },
+                const {logged_user} = store;
+                let options = {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "User-Agent": "PostmanRuntime/7.26.8",
+                        "Accept": "*/*",
+                        "Accept-Encoding": "gzip, deflate, br",
+                        "Connection": "keep-alive",
+                        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
+                    },
+
+                };
+
+                const response = await fetch(
+                    `http://127.0.0.1:5000/favorites/user/${logged_user.id}`
+                    , options
+                );
+                
+                const json = await response.json();
+                console.log("--favorites--", json);
+                setStore({ userFavorites: json });
+
+            },
+            getMoviesbyId: async (movie_id) => {
+                const response = await fetch(
+                    `http://www.omdbapi.com/?i=${movie_id}7&apikey=70240a7d`
+                );
+                const json = await response.json();
+                console.log("--Moviebyid--", json);
+                setStore({ movieDetails: json });
+            },
+        }
     };
 };
 
