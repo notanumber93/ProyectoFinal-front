@@ -6,10 +6,10 @@ const Login = () => {
     const { store, actions } = useContext(Context);
     const [user, setUser] = useUserSession('user');
 
-    const handleSubmit = (evento) => {
+    const handleSubmit = async (evento) => {
         evento.preventDefault();
-        actions.onLogin();
-        setUser(JSON.stringify(store.logged_user));
+        await actions.onLogin();
+        await setUser(JSON.stringify(store.logged_user));
         console.log(user);
     };
 

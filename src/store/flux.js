@@ -221,9 +221,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             },
 
-            showUserFavorites: async () => {
-                const store = getStore();
-                const {logged_user} = store;
+            showUserFavorites: async (id) => {
+                console.log("luis");
                 let options = {
                     method: "GET",
                     headers: {
@@ -238,7 +237,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 };
 
                 const response = await fetch(
-                    `http://127.0.0.1:5000/favorites/user/${logged_user.id}`
+                    `http://127.0.0.1:5000/favorites/user/${id}`
                     , options
                 );
                 
