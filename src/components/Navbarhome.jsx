@@ -1,9 +1,29 @@
 import React, { useState, useEffect, useContext, Component } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import useUserSession from "./userSession";
+import { Button } from "react-bootstrap";
 
 function Navbarhome(props) {
   const { store, actions } = useContext(Context);
+  const [ user, setUser ] = useUserSession('user');
+  const logged_user = JSON.parse(user);
+  let logout;
+
+  const handleLogout = () => {
+    setUser(null);
+    window.location.reload();
+  };
+
+  if (logged_user != null) {
+    logout = (
+      <Button className="my-2 mx-2" type="submit" onClick={() => handleLogout()}>
+        Logout
+      </Button>
+    );
+  }else{
+    logout = null;
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -91,6 +111,7 @@ function Navbarhome(props) {
         <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
           Buscar
         </button>
+        {logout}
       </div>
     </nav>
   );

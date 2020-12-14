@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Card } from "react-bootstrap";
 import MyCardDetails from "./MyCardDetails";
@@ -56,13 +56,13 @@ const MyCard = (props) => {
                         color="#ffc107"
                         size={20}
                     /> }
-                    {props.rate_avg != undefined ? props.rate_avg : '-'}
+                    {props.rate_avg !== undefined ? props.rate_avg : '-'}
                 </Card.Subtitle>
             </Card.Body>
             <Card.Footer>
                <StarRating user_id={1} movie_id={props.movie_id}/>
                 <button type="button" 
-                class="btn btn-secondary" 
+                className="btn btn-secondary" 
                 data-toggle="tooltip" 
                 data-placement="top"
                 title="Añadir a Favoritos"

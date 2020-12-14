@@ -1,13 +1,21 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Navbarhome from "../components/Navbarhome";
 import MyCardeck, { MyCardDeck } from "../components/MyCardDeck";
 import UserProfile from "../components/UserProfile";
 import { Context } from "../store/appContext";
 import { Container, Tab, Tabs } from "react-bootstrap";
 import UserFavoritesDeck from "../components/UserFavoritesDeck";
+import useUserSession from "../components/userSession";
 
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
+    const [ user, setUser ] = useUserSession('user');
+    const logged_user = JSON.parse(user);
+
+    useEffect(() =>{
+        actions.showUserFavorites(logged_user.id);
+    }, []);
+
     return (
         <>
             <Navbarhome />
@@ -15,14 +23,14 @@ export const Perfil = () => {
                 <Tabs defaultActiveKey="profile">
                     <Tab eventKey="profile" title="Datos usuario">
                         <UserProfile
-                            firstName={store.logged_user.firstName}
-                            lastName={store.logged_user.lastName}
-                            email={store.logged_user.email}
-                            userName={store.logged_user.userName}
-                            bio={store.logged_user.bio}
+                            firstName={logged_user != null ? logged_user.firstName : ''}
+                            lastName={logged_user != null ? logged_user.lastName : ''}
+                            email={logged_user != null ? logged_user.email : ''}
+                            userName={logged_user != null ? logged_user.userName : ''}
+                            bio={logged_user != null ? logged_user.bio : ''}
                         />
                     </Tab>
-                    <Tab eventKey="favoritos" title="Favoritos" onClick={(e) => actions.showUserFavorites()}>
+                    <Tab eventKey="favoritos" title="Favoritos">
                         <UserFavoritesDeck />
                     </Tab>
                 </Tabs>

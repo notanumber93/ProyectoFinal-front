@@ -2,10 +2,13 @@ import { useContext, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import UserAdmin from "./UserAdmin";
+import useUserSession from "./userSession";
 
 const UserProfile = (props) => {
     const { store, actions } = useContext(Context);
     const [bio, setBio] = useState("");
+    const [user, setUser] = useUserSession("user");
+    const logged_user = JSON.parse(user);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,12 +17,12 @@ const UserProfile = (props) => {
     };
 
     let adminOptions;
-    if (store.logged_user.isAdmin) {
-        adminOptions = (
-            <UserAdmin/>
-        );
-    }else{
-        adminOptions = null;
+    if (logged_user != null) {
+        if (logged_user.isAdmin) {
+            adminOptions = <UserAdmin />;
+        } else {
+            adminOptions = null;
+        }
     }
 
     return (
