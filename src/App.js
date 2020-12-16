@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import { Landing } from "./views/landing";
 import { Home } from "./views/home";
 import { Signup } from "./views/Signup";
 import { Perfil } from "./views/Perfil";
@@ -23,16 +24,17 @@ const App = () => {
       <BrowserRouter basename={basename}>
         {/* <ScrollToTop> */}
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Landing} />
+      
           <Route exact path="/home">
             <Home />
           </Route>
           <Route exact path="/signup">
             <Signup />
           </Route>
-		  <Route>
-			<Perfil />  
-		  </Route>
+          <Route>
+            <Perfil />
+          </Route>
           <Route render={() => <h1 className="notfound">Not found!</h1>} />
         </Switch>
         <Footer />

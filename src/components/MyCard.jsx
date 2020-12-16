@@ -60,7 +60,7 @@ const MyCard = (props) => {
                 </Card.Subtitle>
             </Card.Body>
             <Card.Footer>
-               <StarRating user_id={1} movie_id={props.movie_id}/>
+               { props.show ? <StarRating user_id={1} movie_id={props.movie_id} /> : null }
                 <button type="button" 
                 className="btn btn-secondary" 
                 data-toggle="tooltip" 

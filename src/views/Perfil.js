@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbarhome from "../components/Navbarhome";
 import MyCardeck, { MyCardDeck } from "../components/MyCardDeck";
 import UserProfile from "../components/UserProfile";
@@ -6,11 +6,18 @@ import { Context } from "../store/appContext";
 import { Container, Tab, Tabs } from "react-bootstrap";
 import UserFavoritesDeck from "../components/UserFavoritesDeck";
 import useUserSession from "../components/userSession";
+import UserRatesDeck from "../components/UserRatesDeck";
 
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
     const [ user, setUser ] = useUserSession('user');
     const logged_user = JSON.parse(user);
+    const [searchValue, setSearchValue] = useState('star wars');
+
+    const handledChange = e => {
+        setSearchValue(e.target.value);
+        console.log(e.target.value);
+    }
 
     useEffect(() =>{
         actions.showUserFavorites(logged_user.id);
@@ -18,7 +25,7 @@ export const Perfil = () => {
 
     return (
         <>
-            <Navbarhome />
+            <Navbarhome searchValue={searchValue} handledChange={handledChange} />
             <Container>
                 <Tabs defaultActiveKey="profile">
                     <Tab eventKey="profile" title="Datos usuario">
@@ -32,6 +39,9 @@ export const Perfil = () => {
                     </Tab>
                     <Tab eventKey="favoritos" title="Favoritos">
                         <UserFavoritesDeck />
+                    </Tab>
+                    <Tab eventKey="user_rate" title="Rating">
+                        <UserRatesDeck searchValue={searchValue} />
                     </Tab>
                 </Tabs>
             </Container>
