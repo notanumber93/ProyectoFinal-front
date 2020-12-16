@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import { Landing } from "./views/landing";
 import { Home } from "./views/home";
 import { Signup } from "./views/Signup";
 import { Perfil } from "./views/Perfil";

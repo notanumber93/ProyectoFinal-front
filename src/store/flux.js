@@ -202,6 +202,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
             },
+            getUserRates: async (searchValue, user_id) => {
+                console.log(searchValue);
+                const response = await fetch(
+                    `http://www.omdbapi.com?s=${searchValue}&type=movie&apikey=70240a7d`
+                );
+                const json = await response.json();
+                console.log("--json--", json);
+                let options = {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "User-Agent": "PostmanRuntime/7.26.8",
+                        "Accept": "*/*",
+                        "Accept-Encoding": "gzip, deflate, br",
+                        "Connection": "keep-alive",
+                        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
+                    },
+                };
+                const response2 = await fetch(
+                    `http://127.0.0.1:5000/user_rates/${user_id}`, options
+                );
+                const json2 = await response2.json();
+                console.log("--json2--", json2);
+                for (var i = 0; i < json.Search.length; i++) {
+                    for (var j = 0; j < json2.user_rates.length; j++) {
+                        if (json2.user_rates[j].movie_id == json.Search[i].imdbID) {
+                            json.Search[i].rate = json2.user_rates[j].rate;
+                        }
+                    }
+                }
+                //Borrar las películas que no tienen rating
+                for (var k=json.Search.length-1; k>=0; k--) {
+                    if (json.Search[k].rate == undefined) {
+                        json.Search.splice(k);
+                    }
+                }
+                setStore({ movieList: json.Search });
+            },
             addUserFavorites: async (user_id, movie_id) => {
                 let options = {
                     method: "POST",
