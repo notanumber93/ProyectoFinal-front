@@ -30,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             movieList: [],
             movieDetails: {},
             user_favorites: [],
+            error_msg: "",
         },
 
         actions: {
@@ -128,6 +129,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                 logged_user.auth_token = json.access_token;
                 setStore({ logged_user });
                 console.log(logged_user);
+                if (json.msg != null) {
+                    setStore({ error_msg: json.msg });
+                }
             },
             getMovieList: async (searchValue) => {
                 console.log(searchValue);
