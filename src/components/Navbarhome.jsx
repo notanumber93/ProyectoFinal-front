@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useContext, Component } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import useUserSession from "./userSession";
 import { Button } from "react-bootstrap";
 
 function Navbarhome(props) {
     const { store, actions } = useContext(Context);
+    const [search, setSearch] = useState("");
     const [user, setUser] = useUserSession("user");
     const logged_user = JSON.parse(user);
+    const history = useHistory();
     let logout;
     let login;
     let perfil;
+    let inicio;
 
     const handleLogout = () => {
         setUser(null);
@@ -19,6 +22,11 @@ function Navbarhome(props) {
 
     if (logged_user != null && JSON.stringify(logged_user) !== "{}") {
         console.log(logged_user);
+        inicio = (
+            <Link className="nav-link" to="/home">
+                Inicio
+            </Link>
+        );
         perfil = (
             <Link className="nav-link" to="/Perfil">
                 Perfil
@@ -40,6 +48,7 @@ function Navbarhome(props) {
                 Login
             </Link>
         );
+        inicio = null;
         perfil = null;
         logout = null;
     }
@@ -47,18 +56,6 @@ function Navbarhome(props) {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link className="navbar-brand" to="/"></Link>
-            <button
-                className="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <span className="navbar-toggler-icon"></span>
-            </button>
-
             <div
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
@@ -81,56 +78,28 @@ function Navbarhome(props) {
                     />
                 </svg>
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/home">
-                            Inicio
-                        </Link>
-                    </li>
+                    <li className="nav-item">{inicio}</li>
                     <li className="nav-item">{login}</li>
-                    <li className="nav-item dropdown">
-                        <Link
-                            className="nav-link dropdown-toggle"
-                            to="/"
-                            id="navbarDropdown"
-                            role="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-                            Menú
-                        </Link>
-                        <div
-                            className="dropdown-menu"
-                            aria-labelledby="navbarDropdown"
-                        >
-                            <Link className="dropdown-item" to="/">
-                                Mejores rankeadas
-                            </Link>
-                            <Link className="dropdown-item" to="/">
-                                Peores rankeadas
-                            </Link>
-                            <div className="dropdown-divider"></div>
-                            <Link className="dropdown-item" to="/">
-                                Top Ten
-                            </Link>
-                        </div>
-                    </li>
                     <li className="nav-item">{perfil}</li>
                 </ul>
-                <form className="form-inline my-2 my-lg-0" />
-                <input
-                    className="form-control mr-sm-2"
-                    defaultValue={props.searchValue}
-                    onChange={(event) => props.handledChange(event)}
-                    placeholder="Search"
-                    aria-label="Search"
-                />
-                <button
-                    className="btn btn-outline-success my-2 my-sm-0"
-                    type="submit"
+                <form
+                    className="form-inline my-2 my-lg-0"
+                    onSubmit={() => history.push("/search/" + search)}
                 >
-                    Buscar
-                </button>
+                    <input
+                        className="form-control mr-sm-2"
+                        defaultValue={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Search"
+                        aria-label="Search"
+                    />
+                    <button
+                        className="btn btn-outline-success my-2 my-sm-0"
+                        type="submit"
+                    >
+                        Buscar
+                    </button>
+                </form>
                 {logout}
             </div>
         </nav>

@@ -12,6 +12,7 @@ import injectContext from "./store/appContext";
 import { Footer } from "./components/footer";
 
 import "./App.css";
+import { Search } from "./views/search";
 
 //create your first component
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
             <BrowserRouter basename={basename}>
                 {/* <ScrollToTop> */}
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={Landing} />
                     <Route exact path="/home">
                         <Home />
                     </Route>
@@ -33,6 +34,9 @@ const App = () => {
                     </Route>
                     <Route exact path="/perfil">
                         <Perfil />
+                    </Route>
+                    <Route exact path="/search/:search">
+                        <Search />
                     </Route>
                     <Route
                         render={() => <h1 className="notfound">Not found!</h1>}
