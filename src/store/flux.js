@@ -133,10 +133,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ error_msg: json.msg });
                 }
             },
-            getMovieList: async (searchValue) => {
+            getMovieList: async (searchValue, auth_token, page) => {
                 console.log(searchValue);
                 const response = await fetch(
-                    `http://www.omdbapi.com?s=${searchValue}&type=movie&apikey=70240a7d`
+                    `http://www.omdbapi.com?s=${searchValue}&type=movie&page=${page}&apikey=70240a7d`
                 );
                 const json = await response.json();
                 console.log("--json--", json);
@@ -148,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Accept": "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
                         "Connection": "keep-alive",
-                        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
+                        "Authorization": `Bearer ${auth_token}`
                     },
                 };
                 const response2 = await fetch(
@@ -159,7 +159,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 //setStore({ rates_avgs: json2.rates_avgs });
                 for (var i = 0; i < json.Search.length; i++) {
                     for (var j = 0; j < json2.rates_avgs.length; j++) {
-                        if (json2.rates_avgs[j].movie_id == json.Search[i].imdbID) {
+                        if (json2.rates_avgs[j].movie_id === json.Search[i].imdbID) {
                             json.Search[i].rate_avg = json2.rates_avgs[j].rate_avg;
                         }
                     }
