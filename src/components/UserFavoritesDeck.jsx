@@ -1,12 +1,19 @@
-import React,{useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {CardDeck} from "react-bootstrap";
 import MyCard from "./MyCard";
 import { Context } from "../store/appContext";
 import { useContext } from "react";
+import useUserSession from "./userSession"; 
 
 
 const UserFavoritesDeck = () => {
     const { store, actions} = useContext(Context);
+    const [user, setUser] = useUserSession("user");
+
+
+    useEffect(() => {
+          actions.showUserFavorites(user.id);
+  }, []);
 
     return (
         <>
@@ -15,9 +22,9 @@ const UserFavoritesDeck = () => {
         return (
           <MyCard
             key={index}
-            title={item.movieDetails.Title}
-            poster={item.movieDetails.Poster}
-            year={item.movieDetails.Year}
+            title={item.title}
+            poster={item.poster}
+            year={item.year}
             // rate_avg={item.rate_avg}
           />
         );

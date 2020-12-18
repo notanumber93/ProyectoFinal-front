@@ -283,7 +283,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 );
                 
                 const json = await response.json();
-                console.log("--favorites--", json);
+                console.log("--favorites_get--", json);
                 setStore({ user_favorites: json });
 
             },

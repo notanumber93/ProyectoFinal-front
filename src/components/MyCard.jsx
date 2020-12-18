@@ -4,10 +4,13 @@ import { Card } from "react-bootstrap";
 import MyCardDetails from "./MyCardDetails";
 import StarRating from "./StarRating";
 import { FaStar, FaHeart } from "react-icons/fa";
+import useUserSession from "./userSession"; 
 
 const MyCard = (props) => {
     const [modalShow, setModalShow] = useState(false);
     const { store, actions } = useContext(Context);
+    const [user, setUser] = useUserSession("user");
+    console.log(user.id);
 
     let modalDetails;
     if (modalShow) {
@@ -24,7 +27,7 @@ const MyCard = (props) => {
 
     const handleFavorites = (event) => {
         event.preventDefault();
-        actions.addUserFavorites(store.logged_user.id, props.movie_id, props.title, props.poster, props.year);
+        actions.addUserFavorites(user.id, props.movie_id, props.year, props.poster, props.title);
     };
 
     return (

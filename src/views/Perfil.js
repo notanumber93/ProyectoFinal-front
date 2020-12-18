@@ -19,11 +19,6 @@ export const Perfil = () => {
         console.log(e.target.value);
     }
 
-    useEffect(() => {
-        if (logged_user != null) {
-            actions.showUserFavorites(logged_user.id);
-        }
-    }, []);
 
     return (
         <>
@@ -46,7 +41,7 @@ export const Perfil = () => {
                         />
                     </Tab>
                     <Tab eventKey="favoritos" title="Favoritos">
-                        <UserFavoritesDeck />
+                        <UserFavoritesDeck searchValue={searchValue}/>
                     </Tab>
                     <Tab eventKey="user_rate" title="Rating">
                         <UserRatesDeck searchValue={searchValue} />
