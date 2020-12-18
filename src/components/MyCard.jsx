@@ -62,7 +62,6 @@ const MyCard = (props) => {
             <Card.Footer>
                <StarRating user_id={1} movie_id={props.movie_id}/>
                 <FaHeart
-                className="btn btn-secondary" 
                 data-toggle="tooltip" 
                 data-placement="top"
                 title="Añadir a Favoritos"

@@ -240,7 +240,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 setStore({ movieList: json.Search });
             },
-            addUserFavorites: async (user_id, movie_id) => {
+            addUserFavorites: async (user_id, movie_id, year, poster, title) => {
                 let options = {
                     method: "POST",
                     headers: {
@@ -251,7 +251,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Connection": "keep-alive",
                         "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
                     },
-                    body: JSON.stringify({   user_id: user_id, movie_id: movie_id})
+                    body: JSON.stringify({   user_id: user_id, movie_id: movie_id, year: year, poster: poster, title: title})
                 };
 
                 const response = await fetch(
