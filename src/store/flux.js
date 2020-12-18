@@ -24,7 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 lastName: "",
                 isAdmin: false,
                 bio: "",
-                auth_token: ""
+                auth_token: "",
             },
             success: false,
             movieList: [],
@@ -50,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${store.logged_user.auth_token}`,
+                        Authorization: `Bearer ${store.logged_user.auth_token}`,
                     },
                     body: JSON.stringify(store.logged_user),
                 };
@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${store.logged_user.auth_token}`,
+                        Authorization: `Bearer ${store.logged_user.auth_token}`,
                     },
                 };
                 const response = await fetch(
@@ -145,22 +145,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                     headers: {
                         "Content-Type": "application/json",
                         "User-Agent": "PostmanRuntime/7.26.8",
-                        "Accept": "*/*",
+                        Accept: "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
-                        "Connection": "keep-alive",
-                        "Authorization": `Bearer ${auth_token}`
+                        Connection: "keep-alive",
+                        Authorization: `Bearer ${auth_token}`,
                     },
                 };
                 const response2 = await fetch(
-                    `http://127.0.0.1:5000/rates_avgs`, options
+                    `http://127.0.0.1:5000/rates_avgs`,
+                    options
                 );
                 const json2 = await response2.json();
                 console.log("--json2--", json2);
                 //setStore({ rates_avgs: json2.rates_avgs });
-                for (var i = 0; i < json.Search.length; i++) {
-                    for (var j = 0; j < json2.rates_avgs.length; j++) {
-                        if (json2.rates_avgs[j].movie_id === json.Search[i].imdbID) {
-                            json.Search[i].rate_avg = json2.rates_avgs[j].rate_avg;
+
+                if (json.Search != null) {
+                    for (var i = 0; i < json.Search.length; i++) {
+                        if (json2.rates_avgs != null) {
+                            for (var j = 0; j < json2.rates_avgs.length; j++) {
+                                if (
+                                    json2.rates_avgs[j].movie_id ===
+                                    json.Search[i].imdbID
+                                ) {
+                                    json.Search[i].rate_avg =
+                                        json2.rates_avgs[j].rate_avg;
+                                }
+                            }
                         }
                     }
                 }
@@ -185,22 +195,25 @@ const getState = ({ getStore, getActions, setStore }) => {
                     headers: {
                         "Content-Type": "application/json",
                         "User-Agent": "PostmanRuntime/7.26.8",
-                        "Accept": "*/*",
+                        Accept: "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
-                        "Connection": "keep-alive",
-                        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
+                        Connection: "keep-alive",
+                        Authorization:
+                            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8",
                     },
-                    body: JSON.stringify({ user_id: user_id, movie_id: movie_id, rate: rate })
+                    body: JSON.stringify({
+                        user_id: user_id,
+                        movie_id: movie_id,
+                        rate: rate,
+                    }),
                 };
 
                 const response = await fetch(
-                    `http://127.0.0.1:5000/api/rate`
-                    , options
+                    `http://127.0.0.1:5000/api/rate`,
+                    options
                 );
                 const json = await response.json();
                 console.log("--rate--", json);
-
-
             },
             getUserRates: async (searchValue, user_id) => {
                 console.log(searchValue);
@@ -214,53 +227,70 @@ const getState = ({ getStore, getActions, setStore }) => {
                     headers: {
                         "Content-Type": "application/json",
                         "User-Agent": "PostmanRuntime/7.26.8",
-                        "Accept": "*/*",
+                        Accept: "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
-                        "Connection": "keep-alive",
-                        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
+                        Connection: "keep-alive",
+                        Authorization:
+                            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8",
                     },
                 };
                 const response2 = await fetch(
-                    `http://127.0.0.1:5000/user_rates/${user_id}`, options
+                    `http://127.0.0.1:5000/user_rates/${user_id}`,
+                    options
                 );
                 const json2 = await response2.json();
                 console.log("--json2--", json2);
                 for (var i = 0; i < json.Search.length; i++) {
                     for (var j = 0; j < json2.user_rates.length; j++) {
-                        if (json2.user_rates[j].movie_id == json.Search[i].imdbID) {
+                        if (
+                            json2.user_rates[j].movie_id ==
+                            json.Search[i].imdbID
+                        ) {
                             json.Search[i].rate = json2.user_rates[j].rate;
                         }
                     }
                 }
                 //Borrar las películas que no tienen rating
-                for (var k=json.Search.length-1; k>=0; k--) {
+                for (var k = json.Search.length - 1; k >= 0; k--) {
                     if (json.Search[k].rate == undefined) {
                         json.Search.splice(k);
                     }
                 }
                 setStore({ movieList: json.Search });
             },
-            addUserFavorites: async (user_id, movie_id, year, poster, title) => {
+            addUserFavorites: async (
+                user_id,
+                movie_id,
+                year,
+                poster,
+                title
+            ) => {
                 let options = {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         "User-Agent": "PostmanRuntime/7.26.8",
-                        "Accept": "*/*",
+                        Accept: "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
-                        "Connection": "keep-alive",
-                        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
+                        Connection: "keep-alive",
+                        Authorization:
+                            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8",
                     },
-                    body: JSON.stringify({   user_id: user_id, movie_id: movie_id, year: year, poster: poster, title: title})
+                    body: JSON.stringify({
+                        user_id: user_id,
+                        movie_id: movie_id,
+                        year: year,
+                        poster: poster,
+                        title: title,
+                    }),
                 };
 
                 const response = await fetch(
-                    `http://127.0.0.1:5000/favorites`
-                    , options
+                    `http://127.0.0.1:5000/favorites`,
+                    options
                 );
                 const json = await response.json();
                 console.log("--favorites--", json);
-
             },
 
             showUserFavorites: async (id) => {
@@ -269,23 +299,22 @@ const getState = ({ getStore, getActions, setStore }) => {
                     headers: {
                         "Content-Type": "application/json",
                         "User-Agent": "PostmanRuntime/7.26.8",
-                        "Accept": "*/*",
+                        Accept: "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
-                        "Connection": "keep-alive",
-                        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8"
+                        Connection: "keep-alive",
+                        Authorization:
+                            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8",
                     },
-
                 };
 
                 const response = await fetch(
-                    `http://127.0.0.1:5000/favorites/${id}`
-                    , options
+                    `http://127.0.0.1:5000/favorites/${id}`,
+                    options
                 );
-                
+
                 const json = await response.json();
                 console.log("--favorites_get--", json);
                 setStore({ user_favorites: json });
-
             },
             getMoviesbyId: async (movie_id) => {
                 const response = await fetch(
@@ -295,7 +324,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log("--Moviebyid--", json);
                 setStore({ movieDetails: json });
             },
-        }
+        },
     };
 };
 

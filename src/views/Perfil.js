@@ -12,17 +12,16 @@ export const Perfil = () => {
     const { store, actions } = useContext(Context);
     const [user, setUser] = useUserSession("user");
     const logged_user = JSON.parse(user);
-    const [searchValue, setSearchValue] = useState('star wars');
+    const [searchValue, setSearchValue] = useState("star wars");
 
-    const handledChange = e => {
+    const handledChange = (e) => {
         setSearchValue(e.target.value);
         console.log(e.target.value);
-    }
-
+    };
 
     return (
         <>
-            <Navbarhome searchValue={searchValue} handledChange={handledChange} />
+            <Navbarhome />
             <Container>
                 <Tabs defaultActiveKey="profile">
                     <Tab eventKey="profile" title="Datos usuario">
@@ -41,10 +40,10 @@ export const Perfil = () => {
                         />
                     </Tab>
                     <Tab eventKey="favoritos" title="Favoritos">
-                        <UserFavoritesDeck searchValue={searchValue}/>
+                        <UserFavoritesDeck user={logged_user} />
                     </Tab>
                     <Tab eventKey="user_rate" title="Rating">
-                        <UserRatesDeck searchValue={searchValue} />
+                        <UserRatesDeck />
                     </Tab>
                 </Tabs>
             </Container>
