@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import { Card } from "react-bootstrap";
 import MyCardDetails from "./MyCardDetails";
+import StarRating from "./StarRating";
+import { FaStar, FaHeart } from "react-icons/fa";
+import useUserSession from "./userSession"; 
 
 const MyCard = (props) => {
     const [modalShow, setModalShow] = useState(false);
+    const { store, actions } = useContext(Context);
+    const [user, setUser] = useUserSession("user");
+    console.log(user.id);
 
     let modalDetails;
     if (modalShow) {
@@ -17,6 +24,11 @@ const MyCard = (props) => {
     } else {
         modalDetails = null;
     }
+
+    const handleFavorites = (event) => {
+        event.preventDefault();
+        actions.addUserFavorites(user.id, props.movie_id, props.year, props.poster, props.title);
+    };
 
     return (
         <Card
@@ -40,12 +52,24 @@ const MyCard = (props) => {
                 style={{ cursor: "pointer" }}
             >
                 <Card.Title>{props.title}</Card.Title>
-                <Card.Subtitle>{props.year}</Card.Subtitle>
+                <Card.Subtitle>
+                    {props.year}<br></br>
+                { <FaStar
+                        className="star"
+                        color="#ffc107"
+                        size={20}
+                    /> }
+                    {props.rate_avg !== undefined ? props.rate_avg : '-'}
+                </Card.Subtitle>
             </Card.Body>
             <Card.Footer>
-                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Añadir a Favoritos">
-                    &hearts;
-                </button>
+               <StarRating user_id={1} movie_id={props.movie_id}/>
+                <FaHeart
+                data-toggle="tooltip" 
+                data-placement="top"
+                title="Añadir a Favoritos"
+                onClick={(event) => handleFavorites(event)}>  
+                </FaHeart>
             </Card.Footer>
             {modalDetails}
         </Card>
@@ -53,3 +77,4 @@ const MyCard = (props) => {
 };
 
 export default MyCard;
+

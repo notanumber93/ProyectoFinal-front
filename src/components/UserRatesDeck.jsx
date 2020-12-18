@@ -7,7 +7,7 @@ export const MyCardDeck = (props) => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
-    actions.getMovieList(props.searchValue);
+    actions.getUserRates(props.searchValue,1);
   }, [props.searchValue]);
 
   return (
@@ -20,12 +20,13 @@ export const MyCardDeck = (props) => {
             poster={item.Poster}
             year={item.Year}
             movie_id={item.imdbID}
-            rate_avg={item.rate_avg}
+            rate_avg={item.rate}
+            show={false}
           />
         );
       })}
     </CardDeck>
-  )
+    )
 }
 
 export default MyCardDeck;
