@@ -264,7 +264,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             showUserFavorites: async (id) => {
-                console.log("luis");
                 let options = {
                     method: "GET",
                     headers: {
@@ -279,13 +278,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                 };
 
                 const response = await fetch(
-                    `http://127.0.0.1:5000/favorites/user/${id}`
+                    `http://127.0.0.1:5000/favorites/${id}`
                     , options
                 );
                 
                 const json = await response.json();
                 console.log("--favorites--", json);
-                setStore({ userFavorites: json });
+                setStore({ user_favorites: json });
 
             },
             getMoviesbyId: async (movie_id) => {

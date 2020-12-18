@@ -12,13 +12,12 @@ const UserFavoritesDeck = () => {
         <>
         <CardDeck className="justify-content-center">
       {!!store.user_favorites && store.user_favorites.length>0 && store.user_favorites.map((item, index) => {
-        actions.getMoviesbyId(item.movie_id) 
         return (
           <MyCard
             key={index}
-            title={store.movieDetails.Title}
-            poster={store.movieDetails.Poster}
-            year={store.movieDetails.Year}
+            title={item.movieDetails.Title}
+            poster={item.movieDetails.Poster}
+            year={item.movieDetails.Year}
             // rate_avg={item.rate_avg}
           />
         );

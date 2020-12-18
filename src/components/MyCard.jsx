@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { Card } from "react-bootstrap";
 import MyCardDetails from "./MyCardDetails";
 import StarRating from "./StarRating";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaHeart } from "react-icons/fa";
 
 const MyCard = (props) => {
     const [modalShow, setModalShow] = useState(false);
@@ -24,7 +24,7 @@ const MyCard = (props) => {
 
     const handleFavorites = (event) => {
         event.preventDefault();
-        actions.addUserFavorites(store.logged_user.id, props.movie_id);
+        actions.addUserFavorites(store.logged_user.id, props.movie_id, props.title, props.poster, props.year);
     };
 
     return (
@@ -60,15 +60,14 @@ const MyCard = (props) => {
                 </Card.Subtitle>
             </Card.Body>
             <Card.Footer>
-               { props.show ? <StarRating user_id={1} movie_id={props.movie_id} /> : null }
-                <button type="button" 
+               <StarRating user_id={1} movie_id={props.movie_id}/>
+                <FaHeart
                 className="btn btn-secondary" 
                 data-toggle="tooltip" 
                 data-placement="top"
                 title="Añadir a Favoritos"
-                onClick={(event) => handleFavorites(event)}>
-                    &hearts;
-                </button>
+                onClick={(event) => handleFavorites(event)}>  
+                </FaHeart>
             </Card.Footer>
             {modalDetails}
         </Card>
@@ -76,3 +75,4 @@ const MyCard = (props) => {
 };
 
 export default MyCard;
+
