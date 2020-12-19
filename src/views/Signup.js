@@ -10,6 +10,7 @@ export const Signup = () => {
         <>
             <Navbarhome />
             <MyTab />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Clap_cinema.svg/564px-Clap_cinema.svg.png" className="ImgMovieAction" />
         </>
     );
 }

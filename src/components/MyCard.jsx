@@ -10,6 +10,7 @@ const MyCard = (props) => {
     const [modalShow, setModalShow] = useState(false);
     const { store, actions } = useContext(Context);
     const [user, setUser] = useUserSession("user");
+    const logged_user = JSON.parse(user);
     console.log(user.id);
 
     let modalDetails;
@@ -27,7 +28,7 @@ const MyCard = (props) => {
 
     const handleFavorites = (event) => {
         event.preventDefault();
-        actions.addUserFavorites(user.id, props.movie_id, props.year, props.poster, props.title);
+        actions.addUserFavorites(logged_user.id, logged_user.auth_token, props.movie_id, props.year, props.poster, props.title);
     };
 
     return (

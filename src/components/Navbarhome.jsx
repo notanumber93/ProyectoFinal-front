@@ -14,10 +14,11 @@ function Navbarhome(props) {
     let login;
     let perfil;
     let inicio;
+    let searchBox;
 
-    const handleLogout = () => {
-        setUser(null);
-        window.location.reload();
+    const handleLogout = async () => {
+        await setUser(null);
+        history.push("/");
     };
 
     if (logged_user != null && JSON.stringify(logged_user) !== "{}") {
@@ -31,6 +32,26 @@ function Navbarhome(props) {
             <Link className="nav-link" to="/Perfil">
                 Perfil
             </Link>
+        );
+        searchBox = (
+            <form
+                className="form-inline my-2 my-lg-0"
+                onSubmit={() => history.push("/search/" + search)}
+            >
+                <input
+                    className="form-control mr-sm-2"
+                    defaultValue={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search"
+                    aria-label="Search"
+                />
+                <button
+                    className="btn btn-outline-success my-2 my-sm-0"
+                    type="submit"
+                >
+                    Buscar
+                </button>
+            </form>
         );
         logout = (
             <Button
@@ -82,24 +103,7 @@ function Navbarhome(props) {
                     <li className="nav-item">{login}</li>
                     <li className="nav-item">{perfil}</li>
                 </ul>
-                <form
-                    className="form-inline my-2 my-lg-0"
-                    onSubmit={() => history.push("/search/" + search)}
-                >
-                    <input
-                        className="form-control mr-sm-2"
-                        defaultValue={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        placeholder="Search"
-                        aria-label="Search"
-                    />
-                    <button
-                        className="btn btn-outline-success my-2 my-sm-0"
-                        type="submit"
-                    >
-                        Buscar
-                    </button>
-                </form>
+                {searchBox}
                 {logout}
             </div>
         </nav>
