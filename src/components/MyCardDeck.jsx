@@ -31,7 +31,9 @@ export const MyCardDeck = (props) => {
                                     poster={item.Poster}
                                     year={item.Year}
                                     movie_id={item.imdbID}
-                                    rate_avg={item.rate_avg}
+                                    rate={item.rate}
+                                    show={true}
+                                    showFavorite={true}
                                 />
                             );
                         })}

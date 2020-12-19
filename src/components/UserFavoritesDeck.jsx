@@ -22,7 +22,8 @@ const UserFavoritesDeck = (props) => {
                             title={item.title}
                             poster={item.poster}
                             year={item.year}
-                            // rate_avg={item.rate_avg}
+                            favorite={true}
+                            showFavorite={true}
                         />
                     );
                 })}

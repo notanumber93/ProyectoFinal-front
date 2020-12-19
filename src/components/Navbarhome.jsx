@@ -81,10 +81,6 @@ function Navbarhome(props) {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
             >
-                <svg>
-                   
-                    
-                </svg>
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">{inicio}</li>
                     <li className="nav-item">{login}</li>
