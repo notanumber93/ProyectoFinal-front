@@ -20,7 +20,7 @@ const MyCarousel = () => {
 
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} style={{background: "#3C56D6", color: "white"}}>
+    <Carousel activeIndex={index} onSelect={handleSelect} style={{ color: "white"}}>
       {!!store.topMovies && store.topMovies.length > 0 && store.topMovies.map((item, indexa) => {
         return (
 
