@@ -39,7 +39,7 @@
 }
 .movie {
   height: 550px;
-  margin: 0 auto;
+  /* margin: 10px 0 10px 250px; */
 }
 
 .App {
