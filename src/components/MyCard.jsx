@@ -28,7 +28,7 @@ const MyCard = (props) => {
 
     const handleFavorites = (event) => {
         event.preventDefault();
-        actions.addUserFavorites(logged_user.id, props.movie_id, props.year, props.poster, props.title);
+        actions.addUserFavorites(logged_user.id, logged_user.auth_token, props.movie_id, props.year, props.poster, props.title);
     };
 
     return (
