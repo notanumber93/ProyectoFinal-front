@@ -17,7 +17,7 @@ const StarRating = (props) => {
                         type="radio"
                         name="rating"
                         value={ratingValue}
-                        onClick={() => {setRating(ratingValue); actions.setRating2(props.user_id, props.movie_id, ratingValue);}}
+                        onClick={() => {setRating(ratingValue); actions.setRating2(props.user_id, props.movie_id, ratingValue, props.year, props.poster, props.title);}}
                         
                     />
                    

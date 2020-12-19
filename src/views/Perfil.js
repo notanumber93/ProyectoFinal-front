@@ -22,7 +22,7 @@ export const Perfil = () => {
     return (
         <>
             <Navbarhome />
-            <Container>
+            <Container className="PaddingForms">
                 <Tabs defaultActiveKey="profile">
                     <Tab eventKey="profile" title="Datos usuario">
                         <UserProfile
@@ -43,7 +43,7 @@ export const Perfil = () => {
                         <UserFavoritesDeck user={logged_user} />
                     </Tab>
                     <Tab eventKey="user_rate" title="Rating">
-                        <UserRatesDeck />
+                        <UserRatesDeck user={logged_user} />
                     </Tab>
                 </Tabs>
             </Container>

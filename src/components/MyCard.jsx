@@ -64,7 +64,7 @@ const MyCard = (props) => {
                 </Card.Subtitle>
             </Card.Body>
             <Card.Footer>
-               <StarRating user_id={1} movie_id={props.movie_id}/>
+                {props.show ? <StarRating user_id={logged_user.id} movie_id={props.movie_id} year={props.year} poster={props.poster} title={props.title} /> : null }
                 <FaHeart
                 data-toggle="tooltip" 
                 data-placement="top"
