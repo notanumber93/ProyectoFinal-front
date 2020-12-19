@@ -134,6 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
             getMovieList: async (searchValue, auth_token, page) => {
+                const store = getStore();
                 console.log(searchValue);
                 const response = await fetch(
                     `http://www.omdbapi.com?s=${searchValue}&type=movie&page=${page}&apikey=70240a7d`
@@ -145,10 +146,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                     headers: {
                         "Content-Type": "application/json",
                         "User-Agent": "PostmanRuntime/7.26.8",
-                        Accept: "*/*",
+                        "Accept": "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
-                        Connection: "keep-alive",
-                        Authorization: `Bearer ${auth_token}`,
+                        "Connection": "keep-alive",
+                        "Authorization": `Bearer ${auth_token}`,
                     },
                 };
                 const response2 = await fetch(
@@ -164,16 +165,18 @@ const getState = ({ getStore, getActions, setStore }) => {
                         if (json2.rates_avgs != null) {
                             for (var j = 0; j < json2.rates_avgs.length; j++) {
                                 if (
-                                    json2.rates_avgs[j].movie_id ===
+                                    json2.rates_avgs[j].movie_id ==
                                     json.Search[i].imdbID
                                 ) {
-                                    json.Search[i].rate_avg =
-                                        json2.rates_avgs[j].rate_avg;
+                                    json.Search[i].rate =
+                                        json2.rates_avgs[j].rate;
                                 }
                             }
                         }
                     }
                 }
+                console.log("--json on rste pegado--", json);
+
                 setStore({ movieList: json.Search });
             },
             getMovieDetails: async (title) => {

@@ -8,9 +8,10 @@ export const MyCardDeck = (props) => {
     const [user, setUser] = useUserSession("user");
     const [page, setPage] = useState(1);
     const { store, actions } = useContext(Context);
+    const logged_user = JSON.parse(user);
 
     useEffect(() => {
-        actions.getMovieList(props.searchValue, user.auth_token, page);
+        actions.getMovieList(props.searchValue, logged_user.auth_token, page);
     }, [props.searchValue]);
 
     return (
@@ -25,7 +26,8 @@ export const MyCardDeck = (props) => {
                             poster={item.Poster}
                             year={item.Year}
                             movie_id={item.imdbID}
-                            rate_avg={item.rate_avg}
+                            rate={item.rate}
+                            show={true}
                         />
                     );
                 })}

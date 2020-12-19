@@ -60,7 +60,7 @@ const MyCard = (props) => {
                         color="#ffc107"
                         size={20}
                     /> }
-                    {props.rate_avg !== undefined ? props.rate_avg : '-'}
+                    {props.rate != undefined ? props.rate : '-'}
                 </Card.Subtitle>
             </Card.Body>
             <Card.Footer>

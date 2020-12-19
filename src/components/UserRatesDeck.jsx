@@ -20,7 +20,7 @@ export const MyCardDeck = (props) => {
             poster={item.Poster}
             year={item.Year}
             movie_id={item.imdbID}
-            rate_avg={item.rate}
+            rate={item.rate}
             show={false}
           />
         );
