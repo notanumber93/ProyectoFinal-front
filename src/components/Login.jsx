@@ -32,13 +32,13 @@ const Login = ({ history }) => {
         <>
             <Container>
                 <Row>
-                    <Col md="6">
-                        <h1>Ingresa</h1>
+                    <Col md="12 PaddingTitles">
+                        <h1 className="FontSpecialElite">Ingresa</h1>
                     </Col>
                 </Row>
             </Container>
             <div className="row">
-                <div className="col-6">
+                <div className="col-12 PaddingForms">
                     <form onSubmit={(evento) => handleSubmit(evento)}>
                         <div className="row mt-4">
                             <div className="col">

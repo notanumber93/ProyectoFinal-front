@@ -1,8 +1,7 @@
-
 .landing{
   height:calc(100% - 0px);
   width:100%;
-  background-color:#000077;
+  background-color:#000022;
   position: absolute;
   top:0px;
   bottom: 0px;
@@ -12,8 +11,12 @@
 }
 .buttonlanding{
   position:absolute;
-  right: 20px;
-  top: 20px;
+  right: 50px;
+  top: 160px;
+  z-index: 200;
+  width: 160px;
+  font-size: 24px !important;
+  border-radius: 20px !important;
   }
 .logoLanding 
 {
@@ -23,6 +26,28 @@
   opacity: 0.85;
 }
 
+.textolanding{
+  color:aliceblue;
+  color:#66a1f9;
+  font-size: 40px;
+  font-weight: lighter;
+  margin-top: 600px;
+}
+.txtlanding{
+  color:#888888;
+  /* font-family: 'Permanent Marker', cursive; */
+  font-family: 'Special Elite', cursive;
+}
+
+.MovieTapeImage {
+  height:150px; 
+  filter: invert(50%);
+  position: absolute;
+  top:20px;
+  left:30px;
+  right: 30px;
+  width: 96%;
+}
 
 .bar {
   padding: 0.5em 0;
@@ -86,4 +111,36 @@ input[type="radio"]{display:none}
 .star{
  cursor: pointer;
  transition: color 200 ms; 
+}
+
+.BlueBackground {
+  background: #000022;
+}
+
+.WhiteBackground {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 15px;
+  background: #f5f5f5;
+  width: 800px !important;
+}
+
+.PaddingForms {
+  padding: 0px 50px 20px 50px !important;
+}
+
+.PaddingTitles {
+  padding: 20px 20px 0px 30px !important;
+}
+
+.FontSpecialElite {
+  font-family: 'Special Elite', cursive !important;
+}
+
+.ImgMovieAction {
+  width: 200px;
+  position: absolute;
+  right: 300px;
+  bottom: 150px;
+  transform: rotate(-10deg);
 }

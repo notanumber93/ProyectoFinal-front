@@ -13,13 +13,13 @@ const Form = () => {
         <>
             <div className="container">
                 <div className="row">
-                    <div className="col-6">
-                        <h1>Registro de usuarios</h1>
+                    <div className="col-12 PaddingTitles">
+                        <h1 className="FontSpecialElite">Registro de usuarios</h1>
                     </div>
                 </div>
             </div>
             <div className="row">
-                <div className="col-6">
+                <div className="col-12 PaddingForms">
                     <form onSubmit={(evento) => handleSubmit(evento)}>
                         <div className="row mt-4">
                             <div className="col">
