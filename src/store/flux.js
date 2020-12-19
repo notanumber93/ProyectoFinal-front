@@ -241,12 +241,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const json2 = await response2.json();
                 console.log("--json2--", json2);
                 for (var i = 0; i < json.Search.length; i++) {
-                    for (var j = 0; j < json2.user_rates.length; j++) {
-                        if (
-                            json2.user_rates[j].movie_id ==
-                            json.Search[i].imdbID
-                        ) {
-                            json.Search[i].rate = json2.user_rates[j].rate;
+                    if (json2.user_rates != null) {
+                        for (var j = 0; j < json2.user_rates.length; j++) {
+                            if (
+                                json2.user_rates[j].movie_id ==
+                                json.Search[i].imdbID
+                            ) {
+                                json.Search[i].rate = json2.user_rates[j].rate;
+                            }
                         }
                     }
                 }
@@ -260,6 +262,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             addUserFavorites: async (
                 user_id,
+                auth_token,
                 movie_id,
                 year,
                 poster,
@@ -273,8 +276,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         Accept: "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
                         Connection: "keep-alive",
-                        Authorization:
-                            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8",
+                        Authorization: `Bearer ${auth_token}`,
                     },
                     body: JSON.stringify({
                         user_id: user_id,
@@ -293,7 +295,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log("--favorites--", json);
             },
 
-            showUserFavorites: async (id) => {
+            showUserFavorites: async (id, auth_token) => {
                 let options = {
                     method: "GET",
                     headers: {
@@ -302,8 +304,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         Accept: "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
                         Connection: "keep-alive",
-                        Authorization:
-                            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8",
+                        Authorization: `Bearer ${auth_token}`,
                     },
                 };
 
@@ -314,7 +315,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                 const json = await response.json();
                 console.log("--favorites_get--", json);
-                setStore({ user_favorites: json });
+                setStore({ user_favorites: json.favorites });
+                const store = getStore();
+                console.log(store.user_favorites);
             },
             getMoviesbyId: async (movie_id) => {
                 const response = await fetch(

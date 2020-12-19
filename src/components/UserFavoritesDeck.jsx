@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { CardDeck } from "react-bootstrap";
 import MyCard from "./MyCard";
 import { Context } from "../store/appContext";
 import { useContext } from "react";
-import useUserSession from "./userSession";
 
 const UserFavoritesDeck = (props) => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        actions.showUserFavorites(props.user.id);
+        actions.showUserFavorites(props.user.id, props.user.auth_token);
     }, []);
 
     return (
