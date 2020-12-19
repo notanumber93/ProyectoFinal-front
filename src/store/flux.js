@@ -1,4 +1,3 @@
-import React, { useContext, useState, useEffect } from "react";
 
 const getState = ({ getStore, getActions, setStore }) => {
     return {
@@ -31,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             movieDetails: {},
             user_favorites: [],
             error_msg: "",
+            topMovies: [],
         },
 
         actions: {
@@ -244,7 +244,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (json2.user_rates != null) {
                         for (var j = 0; j < json2.user_rates.length; j++) {
                             if (
-                                json2.user_rates[j].movie_id ==
+                                json2.user_rates[j].movie_id ===
                                 json.Search[i].imdbID
                             ) {
                                 json.Search[i].rate = json2.user_rates[j].rate;
@@ -253,8 +253,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 //Borrar las películas que no tienen rating
-                for (var k = json.Search.length - 1; k >= 0; k--) {
-                    if (json.Search[k].rate == undefined) {
+                for (var k=json.Search.length-1; k>=0; k--) {
+                    if (json.Search[k].rate === undefined) {
                         json.Search.splice(k);
                     }
                 }
@@ -319,13 +319,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const store = getStore();
                 console.log(store.user_favorites);
             },
-            getMoviesbyId: async (movie_id) => {
+            getTopMovies: async (movie_id) => {
                 const response = await fetch(
-                    `http://www.omdbapi.com/?i=${movie_id}7&apikey=70240a7d`
+                    `http://www.omdbapi.com/?i=${movie_id}&apikey=70240a7d`
                 );
                 const json = await response.json();
                 console.log("--Moviebyid--", json);
-                setStore({ movieDetails: json });
+                const store = getStore();
+                let {topMovies} = store;
+                topMovies.push(json)
+                setStore({ topMovies: topMovies })
+
             },
         },
     };
