@@ -15,22 +15,28 @@ export const MyCardDeck = (props) => {
     }, [props.searchValue]);
 
     return (
-        <CardDeck className="justify-content-center">
-            {!!store.movieList &&
-                store.movieList.length > 0 &&
-                store.movieList.map((item, index) => {
-                    return (
-                        <MyCard
-                            key={index}
-                            title={item.Title}
-                            poster={item.Poster}
-                            year={item.Year}
-                            movie_id={item.imdbID}
-                            rate={item.rate}
-                            show={true}
-                        />
-                    );
-                })}
+      <CardDeck className="justify-content-center">
+            <div className="row ">
+                <h1 className="display-4 text-light">{props.title}</h1>
+            </div>
+            <div className="container-fluid" >
+                <div className="row flex-row flex-nowrap overflow-auto" >
+                    {!!store.movieList &&
+                        store.movieList.length > 0 &&
+                        store.movieList.map((item, index) => {
+                            return (
+                                <MyCard
+                                    key={index}
+                                    title={item.Title}
+                                    poster={item.Poster}
+                                    year={item.Year}
+                                    movie_id={item.imdbID}
+                                    rate_avg={item.rate_avg}
+                                />
+                            );
+                        })}
+                </div>
+            </div>
         </CardDeck>
     );
 };
