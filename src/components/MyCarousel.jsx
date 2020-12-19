@@ -20,7 +20,7 @@ const MyCarousel = () => {
 
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} style={{background: "black", color: "white"}}>
+    <Carousel activeIndex={index} onSelect={handleSelect} style={{background: "#3C56D6", color: "white"}}>
       {!!store.topMovies && store.topMovies.length > 0 && store.topMovies.map((item, indexa) => {
         return (
 
@@ -29,16 +29,16 @@ const MyCarousel = () => {
               <div className="row">
                 <div className="col-4">
                   <img
-                    className="d-block rounded"
+                    className="d-block rounded movie p-2 m-3"
                     src={item.Poster}
                     alt="poster"
                   />
                 </div>
-                <div className="col m-2">
-                  <h2>{item.Title}</h2>
-                  <p className="p-2">{item.Plot}</p>
-                  <em >{item.Year}</em>
-                  <h5>Dirigida por: {item.Director}</h5>
+                <div className="col m-2 p-4">
+                  <h2 className="display-2">{item.Title}</h2>
+                  <p className="lead">{item.Plot}</p>
+                  <em title="Source Title" className="pt-2">{item.Year}</em>
+                  <h5>Directed by: {item.Director}</h5>
                   <h5>Cast: {item.Actors}</h5>
                 </div>
               </div>
@@ -55,3 +55,4 @@ const MyCarousel = () => {
 
 
 export default MyCarousel;
+
