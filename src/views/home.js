@@ -4,9 +4,11 @@ import MyCarousel from "../components/MyCarousel";
 
 
 export const Home = () => {
+   
     return (
         <>
             <Navbarhome />
+
             <MyCarousel />
         </>
     );

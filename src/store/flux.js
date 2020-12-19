@@ -30,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             movieDetails: {},
             user_favorites: [],
             error_msg: "",
+            topMovies: [],
         },
 
         actions: {
@@ -158,7 +159,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 //setStore({ rates_avgs: json2.rates_avgs });
                 for (var i = 0; i < json.Search.length; i++) {
                     for (var j = 0; j < json2.rates_avgs.length; j++) {
-                        if (json2.rates_avgs[j].movie_id == json.Search[i].imdbID) {
+                        if (json2.rates_avgs[j].movie_id === json.Search[i].imdbID) {
                             json.Search[i].rate_avg = json2.rates_avgs[j].rate_avg;
                         }
                     }
@@ -226,14 +227,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log("--json2--", json2);
                 for (var i = 0; i < json.Search.length; i++) {
                     for (var j = 0; j < json2.user_rates.length; j++) {
-                        if (json2.user_rates[j].movie_id == json.Search[i].imdbID) {
+                        if (json2.user_rates[j].movie_id === json.Search[i].imdbID) {
                             json.Search[i].rate = json2.user_rates[j].rate;
                         }
                     }
                 }
                 //Borrar las películas que no tienen rating
                 for (var k=json.Search.length-1; k>=0; k--) {
-                    if (json.Search[k].rate == undefined) {
+                    if (json.Search[k].rate === undefined) {
                         json.Search.splice(k);
                     }
                 }
@@ -280,19 +281,23 @@ const getState = ({ getStore, getActions, setStore }) => {
                     `http://127.0.0.1:5000/favorites/${id}`
                     , options
                 );
-                
+
                 const json = await response.json();
                 console.log("--favorites_get--", json);
                 setStore({ user_favorites: json });
 
             },
-            getMoviesbyId: async (movie_id) => {
+            getTopMovies: async (movie_id) => {
                 const response = await fetch(
-                    `http://www.omdbapi.com/?i=${movie_id}7&apikey=70240a7d`
+                    `http://www.omdbapi.com/?i=${movie_id}&apikey=70240a7d`
                 );
                 const json = await response.json();
                 console.log("--Moviebyid--", json);
-                setStore({ movieDetails: json });
+                const store = getStore();
+                let {topMovies} = store;
+                topMovies.push(json)
+                setStore({ topMovies: topMovies })
+
             },
         }
     };
