@@ -7,7 +7,7 @@ export const MyCardDeck = (props) => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
-    actions.getUserRates(props.searchValue,1);
+    actions.getUserRates(props.user.id, props.user.auth_token);
   }, [props.searchValue]);
 
   return (

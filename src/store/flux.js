@@ -189,7 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ movieDetails: {} });
             },
 
-            setRating2: async (user_id, movie_id, rate) => {
+            setRating2: async (user_id, auth_token, movie_id, rate, year, poster, title) => {
                 let options = {
                     method: "POST",
                     headers: {
@@ -198,13 +198,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                         Accept: "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
                         Connection: "keep-alive",
-                        Authorization:
-                            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8",
+                        Authorization: `Bearer ${auth_token}`,
                     },
                     body: JSON.stringify({
                         user_id: user_id,
                         movie_id: movie_id,
                         rate: rate,
+                        year:year,
+                        poster:poster,
+                        title:title
                     }),
                 };
 
@@ -215,13 +217,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const json = await response.json();
                 console.log("--rate--", json);
             },
-            getUserRates: async (searchValue, user_id) => {
+            getUserRates: async (user_id, auth_token) => {
+                console.log('user_id', user_id, 'auth_token', auth_token);
+                /*
                 console.log(searchValue);
                 const response = await fetch(
                     `http://www.omdbapi.com?s=${searchValue}&type=movie&apikey=70240a7d`
                 );
                 const json = await response.json();
                 console.log("--json--", json);
+                */
                 let options = {
                     method: "GET",
                     headers: {
@@ -230,8 +235,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         Accept: "*/*",
                         "Accept-Encoding": "gzip, deflate, br",
                         Connection: "keep-alive",
-                        Authorization:
-                            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDc3MzkxOTksIm5iZiI6MTYwNzczOTE5OSwianRpIjoiMjhlYWE2NGYtMWYzZC00NmNiLWE0ODgtNTNkMDJkODY3ZDgxIiwiZXhwIjoxNjA4MzQzOTk5LCJpZGVudGl0eSI6Im51ZXZvQGV4YW1wbGUuY29tIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.rx3GMdI1ZXXnxjsh-1qW3bK8jIhBFREOUqAEeUCfZk8",
+                        Authorization: `Bearer ${auth_token}`,
                     },
                 };
                 const response2 = await fetch(
@@ -240,6 +244,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 );
                 const json2 = await response2.json();
                 console.log("--json2--", json2);
+                /*
                 for (var i = 0; i < json.Search.length; i++) {
                     if (json2.user_rates != null) {
                         for (var j = 0; j < json2.user_rates.length; j++) {
@@ -258,7 +263,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         json.Search.splice(k);
                     }
                 }
-                setStore({ movieList: json.Search });
+                */
+                setStore({ movieList: json2.user_rates });
+                //setStore({ movieList: json.Search });
             },
             addUserFavorites: async (
                 user_id,

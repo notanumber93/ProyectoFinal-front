@@ -26,8 +26,8 @@ const UserProfile = (props) => {
     }
 
     return (
-        <Container>
-            <h1>Perfil</h1>
+        <Container className="WhiteBackground PaddingForms">
+            <h1 className="FontSpecialElite">Perfil</h1>
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <Form.Group as={Row}>
                     <Form.Label column sm="5" style={{ textAlign: "center" }}>
